@@ -9,6 +9,8 @@ with open("pkglist.txt", "w") as f:
 with open("aurlist.txt", "w") as f:
     subprocess.run(["yay", "-Qm", "--aur"], stdout=f)
 
-compactar = subprocess.run([ "tar", "-czvf", "backup.tar.gz", "/home/ryan/.config", "/home/ryan/bin", "/home/ryan/.local/share/fonts", "/home/ryan/.local/share/icons", "/home/ryan/.local/share/applications", "/home/ryan/.zshrc" ,"aurlist.txt", "pkglist.txt"])
+usuario = subprocess.check_output(["whoami"], text=True).strip()
+
+compactar = subprocess.run([ "tar", "-czvf", "backup.tar.gz", f"/home/{usuario}/.config", f"/home/{usuario}/bin", f"/home/{usuario}/.local/share/fonts", f"/home/{usuario}/.local/share/icons", f"/home/{usuario}/.local/share/applications", f"/home/{usuario}/.zshrc" ,"aurlist.txt", "pkglist.txt"])
 
 print(compactar)
