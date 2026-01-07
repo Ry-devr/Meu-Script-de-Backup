@@ -15,15 +15,15 @@ usuario = subprocess.check_output(["whoami"], text=True).strip() # ver usuario l
 compactar = subprocess.run([ "tar", "-czvf", "backup.tar.gz", f"/home/{usuario}/.config", f"/home/{usuario}/bin", f"/home/{usuario}/.local/share/fonts", f"/home/{usuario}/.local/share/icons", f"/home/{usuario}/.local/share/applications", f"/home/{usuario}/.zshrc" ,"aurlist.txt", "pkglist.txt"])
 print(compactar)
 
-##### teste para por automaticamente e escolher a media #####
-if os.path.isdir(f"/run/media/{usuario}/Ventoy"):
+##### LOCAL DE SALVAMENTO DO BACKUP #####
+if os.path.isdir(f"/run/media/{usuario}/Ventoy"): # verificar se o pendrive esta
     if os.path.exists(f"/run/media/ryan/Ventoy/backup.tar.gz"):
         os.remove(f"/run/media/ryan/Ventoy/backup.tar.gz")
 
     shutil.move("backup.tar.gz", f"/run/media/{usuario}/Ventoy")
     print("arquivo enviado para pendrive")
 
-else:
+else: # caso nao encontre pendrive ele salva na pasta /home/usuario/backup
     if os.path.exists(f"/home/{usuario}/backup"):
         os.remove(f"/run/media/ryan/Ventoy/backup.tar.gz")
 
