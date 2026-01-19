@@ -1,9 +1,13 @@
 import os, shutil, subprocess
 
-usuario = subprocess.check_output(["whoami"], text=True).strip() # ver usuario longado, q tbm tem o memsmo nomd das pasta que sera usada ;)
+usuario = subprocess.check_output(["whoami"], text=True).strip() # ver usuario longado, q tbm tem o memsmo nome das pasta que sera usada ;)
 
-if os.path.isdir(f'/run/media/{usuario}/Ventoy'):
-    subprocess.run(['tar', '-xvzf', f'/run/media/{usuario}/Ventoy/backup.tar.gz', 'pkglist.txt'])
-
+##### PACOTES #####
+if os.path.isfile(f'/run/media/{usuario}/Ventoy/backup.tar.gz'):
+    subprocess.run(['tar', '-xvzf', f'/run/media/{usuario}/Ventoy/backup.tar.gz', 'pkglist.txt', 'aurlist.txt'])
+elif os.path.isfile(f'/home/{usuario}/Backups/backup.tar.gz'):
+    subprocess.run(['tar', '-xvzf', f'/home/{usuario}/Backups/backup.tar.gz', 'pkglist.txt','aurlist.txt'])
 else:
-    subprocess.run(['tar', '-xvzf', '/home/ryan/Backups/backup.tar.gz', 'pkglist.txt'])
+    print("arquivo nao encontrado")
+
+
