@@ -10,4 +10,5 @@ elif os.path.isfile(f'/home/{usuario}/Backups/backup.tar.gz'):
 else:
     print("arquivo nao encontrado")
 
-
+print("abra outro treminal e rode 'pacman -S $(cat pkglist.txt)', e depois o aur 'yay -S $(cat aurlist.txt)'")
+input("digite qualquer coisa caso ja tenha intalado todos os pacotes: ")
