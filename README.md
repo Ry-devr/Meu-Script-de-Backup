@@ -4,8 +4,13 @@
 - faz backup das configs
 - faz backup dos pacotes instalados
 
-## adicionar:
-- implementar funçao de escolher qual media fisica usar para enviar pacote do backup
-- corrigir problemas
+## comando
+#### fazer backup
+
+```python3.14 backup.py```
+
+#### instalar o backup
+```python3.14 install_backup.py```
+
 
 por enquanto é so isso ainda tou vendo oq fasso :/
