@@ -1,5 +1,5 @@
-import os
+from tqdm import tqdm
+import time
 
-caminho = [os.path.join("/run/media/ryan", nome) for nome in os.listdir("/run/media/ryan")]
-
-print(caminho)
+for i in tqdm(range(100)):
+    time.sleep(0.05)
