@@ -1,5 +1,4 @@
-from tqdm import tqdm
-import time
+import subprocess
 
-for i in tqdm(range(100)):
-    time.sleep(0.05)
+pendrive = subprocess.check_output(["ls", f"/run/media/ryan/"], text=True).strip()
+print(pendrive)

@@ -1,7 +1,6 @@
 import os
 import shutil
 import subprocess
-from tqdm import tqdm
 
 ##### PACOTES PACMAN #####
 with open("pkglist.txt", "w") as f:
@@ -26,18 +25,21 @@ subprocess.run([
 ])
 
 ##### LOCAL DE SALVAMENTO DO BACKUP #####
-if os.path.isdir(f"/run/media/{usuario}/Ventoy"): # verificar se o pendrive esta
-    if os.path.exists(f"/run/media/{usuario}/Ventoy/backup.tar.gz"):
-        os.remove(f"/run/media/ryan/Ventoy/backup.tar.gz")
+media_Disk = subprocess.check_output(["ls", f"/run/media/{usuario}"], text=True).strip() # Descobrir o nome da media removivel
 
-    print("enviando para media...")
-    shutil.move("backup.tar.gz", f"/run/media/{usuario}/Ventoy")
+if os.path.isdir(f"/run/media/{usuario}/{media_Disk}"): # verificar se o pendrive esta
+    if os.path.exists(f"/run/media/{usuario}/{media_Disk}/backup.tar.gz"):
+        os.remove(f"/run/media/{usuario}/{media_Disk}/backup.tar.gz")
+
+    print("\n\nenviando para media...")
+    shutil.move("backup.tar.gz", f"/run/media/{usuario}/{media_Disk}")
     print("arquivo!!")
 
 else: # caso nao encontre pendrive ele salva na pasta /home/usuario/backup
     if os.path.exists(f"/home/{usuario}/Backups/backup.tar.gz"):
         os.remove(f"/home/{usuario}/Backups/backup.tar.gz")
 
-    print('enviando para home...')
+    print("media não encontrado!!")
+    print('\n\nenviando para home...')
     shutil.move("backup.tar.gz", f"/home/{usuario}/Backups")
-    print("enviado!!")
+    print("\n\nenviado!!")
