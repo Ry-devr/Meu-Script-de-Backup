@@ -13,8 +13,17 @@ with open("aurlist.txt", "w") as f:
 usuario = subprocess.check_output(["whoami"], text=True).strip() # Ver usuario longado, q tbm tem o memsmo nome das pasta que sera usada ;)
 
 ##### COMPRIMIR #####
+# DATA
+from datetime import datetime
+data = datetime.now().strftime("%Y-%m-%d")
+
 subprocess.run([ 
-    "tar", "-czvf", "backup.tar.gz",
+    "tar", "-czvf", "backup-{data}.tar.gz",
+    f"/home/{usuario}/Estudos",
+    f"/home/{usuario}/projetos",
+    f"/home/{usuario}/Projetos\ Git/",
+    f"/home/{usuario}/Imagens",
+    f"/home/{usuario}/Documentos",
     f"/home/{usuario}/.config",
     f"/home/{usuario}/bin",
     f"/home/{usuario}/.local/share/fonts",
@@ -31,7 +40,7 @@ if os.path.isdir(f"/run/media/{usuario}/{media_Disk}"): # verificar se o pendriv
     if os.path.exists(f"/run/media/{usuario}/{media_Disk}/backup.tar.gz"):
         os.remove(f"/run/media/{usuario}/{media_Disk}/backup.tar.gz")
 
-    print("\n\nenviando para media...")
+    print(f"\nenviando para {media_Disk}...")
     shutil.move("backup.tar.gz", f"/run/media/{usuario}/{media_Disk}")
     print("arquivo!!")
 
@@ -40,6 +49,6 @@ else: # caso nao encontre pendrive ele salva na pasta /home/usuario/backup
         os.remove(f"/home/{usuario}/Backups/backup.tar.gz")
 
     print("media não encontrado!!")
-    print('\n\nenviando para home...')
+    print('\nenviando para home...')
     shutil.move("backup.tar.gz", f"/home/{usuario}/Backups")
-    print("\n\nenviado!!")
+    print("enviado!!")
